@@ -1,4 +1,8 @@
 
+Sat Feb 28 16:32:29 NZDT 2004
+0.05
+  * update the build process to work with the latest vfs2
+
 Mon Nov 11 16:14:35 GMT 2002
 0.04
   * changed module name to VFS::Gnome

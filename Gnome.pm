@@ -5,7 +5,7 @@ use Carp;
 require DynaLoader;
 require Exporter;
 use vars qw(@ISA $VERSION @EXPORT_OK $RUN_ONCE);
-$VERSION = '0.04';
+$VERSION = '0.05';
 @ISA = qw(DynaLoader Exporter);
 
 use Data::Dumper;

@@ -2,6 +2,9 @@ use strict;
 use Test;
 BEGIN { plan tests => 5 }
 
+#my $URL = 'http://www.piersharding.com';
+my $URL = 'http://badger.local.net';
+
 use VFS::Gnome;
 ok(1);
 
@@ -16,8 +19,9 @@ my @b = ();
 # test subroutines
 sub test1 {
 
-  #vfsopen(*IN, "<http://www.piersharding.com/index.html") or return 0;
-  vfsopen(*IN, "<http://www.piersharding.com") or return 0;
+  #vfsopen(*IN, "<$URL/index.html") or return 0;
+  vfsopen(*IN, "<$URL") or return 0;
+  #vfsopen(*IN, "<$URL/index.html");
   my @rows = (<IN>);
   close IN;
   $cnt = @rows;
@@ -30,8 +34,8 @@ sub test1 {
 # test subroutines
 sub test2 {
 
-  #vfsopen(*IN, "<http://www.piersharding.com/index.html") or return 0;
-  vfsopen(*IN, "<http://www.piersharding.com") or return 0;
+  #vfsopen(*IN, "<$URL/index.html") or return 0;
+  vfsopen(*IN, "<$URL") or return 0;
   my @rows;
   push(@rows, $_) while(<IN>);
   close IN;

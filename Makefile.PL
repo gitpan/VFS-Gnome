@@ -9,8 +9,10 @@ my $allopt = $pkgcmd.' --list-all';
 my $vfscmd = 'gnome-vfs-config ';
 
 my ($LIBS, $INCS, $DEFINE);
-
-if (`which $pkgcmd` && 
+if (`pkg-config --modversion gnome-vfs-2.0`){
+     $DEFINE = '-DGNOMEVFS2';
+  ($LIBS, $INCS) = gnome_vfs_2x();
+} elsif (`which $pkgcmd` && 
      grep(/gnome\-vfs\-module\-2/, split(/\n/, run_cmd($allopt))) ){
      $DEFINE = '-DGNOMEVFS2';
   ($LIBS, $INCS) = gnome_vfs_2();
@@ -56,6 +58,22 @@ sub gnome_vfs_2 {
 
   croak "Cannot determine your gnome-vfs package from: $allopt\n $cmd_out"
       unless  grep(/gnome\-vfs\-module\-2/, split(/\n/, run_cmd($allopt)));
+  croak "Cannot determine INC path for gnome-vfs: $incopts\n $cmd_out\n"
+      unless $INCS =  run_cmd($incopts);
+  croak "Cannot determine LIB path for gnome-vfs: $libopts\n $cmd_out\n"
+      unless $LIBS = run_cmd($libopts);
+  return ($LIBS, $INCS);
+}
+
+
+sub gnome_vfs_2x {
+  my ($LIBS, $INCS);
+  my $incopts =  $pkgcmd.'--cflags gnome-vfs-2.0';
+  my $libopts =  $pkgcmd.'--libs gnome-vfs-2.0';
+  #warn "incopts = $incopts\n";
+  #warn "libopts = $libopts\n";
+#  croak "Cannot determine your gnome-vfs package from: $allopt\n $cmd_out"
+#      unless  grep(/gnome\-vfs\-module\-2/, split(/\n/, run_cmd($allopt)));
   croak "Cannot determine INC path for gnome-vfs: $incopts\n $cmd_out\n"
       unless $INCS =  run_cmd($incopts);
   croak "Cannot determine LIB path for gnome-vfs: $libopts\n $cmd_out\n"

@@ -16,6 +16,7 @@ SV* do_vfs_open(SV* sv_uri, SV* sv_mode, SV* sv_append){
 
   //fprintf(stderr, "The open mode is: %d \n", SvIV(sv_mode));
   //fprintf(stderr, "The open append is: %d \n", SvIV(sv_append));
+  //fprintf(stderr, "The open uri is: %s \n", SvPV(sv_uri),SvCUR(sv_uri));
   // we are reading this file
   if (SvIV(sv_mode) == 0){
     result = gnome_vfs_open (&handle, (gchar *) SvPV(sv_uri,SvCUR(sv_uri)), GNOME_VFS_OPEN_READ);
